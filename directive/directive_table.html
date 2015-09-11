@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>table -- controller inside directive</title>
+	<script src="../library/angular.min.js"></script>
+	<link rel="stylesheet" href="../library/bootstrap.min.css"/>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="mainCtrl">
+        <pricing-table></pricing-table>
+    </div>
+</div>
+	
+	<script>
+		app = angular.module('myApp', [])
+		
+app.controller('mainCtrl', function($scope) {
+  $scope.pricing_details = { rows:[
+    [{date: '10/11/2012'}, {date: '11/11/2012'}, {date: '12/11/2012'}, {date: '13/11/2012'}, {date: '14/11/2012'}, {date: '15/11/2012'}, {date: '16/11/2012'}],
+    [{date: '10/12/2012'}, {date: '11/12/2012'}, {date: '12/12/2012'}, {date: '13/12/2012'}, {date: '14/12/2012'}, {date: '15/12/2012'}, {date: '16/12/2012'}],
+    [{date: '10/1/2012'}, {date: '11/1/2012'}, {date: '12/1/2012'}, {date: '13/1/2012'}, {date: '14/1/2012'}, {date: '15/1/2012'}, {date: '16/1/2012'}],
+    [{date: '10/4/2012'}, {date: '11/4/2012'}, {date: '12/4/2012'}, {date: '13/4/2012'}, {date: '14/4/2012'}, {date: '15/4/2012'}, {date: '16/4/2012'}]
+  ]
+  };
+});
+
+app.directive("pricingTable", function($compile) {
+    return {
+        restrict: 'E',
+        template: 
+          '<table class="table table-bordered">' +
+            '<thead>' +
+                '<tr>' +
+                    '<th>Mon</th>' +
+                    '<th>Tue</th>' +
+                    '<th>Wed</th>' +
+                    '<th>Thu</th>' +
+                    '<th>Fri</th>' +
+                    '<th>Sat</th>' +
+                    '<th>Sun</th>' +
+                '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+              '<tr ng-repeat="row in pricing_details.rows">' +
+                '<td ng-repeat="col in row">{{col.date}}</td>' +
+              '</tr>' +
+            '</tbody>' +
+          '</table>',
+        //replace: true,
+        link: function (scope, element, attrs) {}
+    };
+});
+	</script>
+
+</body>
+
+</html>

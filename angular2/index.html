@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular 2 HelloWorld</title>
+	<script src="../library/angular2.js"></script>
+</head>
+<body>
+
+	<hello-component></hello-component>
+	
+	<script>
+	//http://blog.thoughtram.io/angular/2015/05/09/writing-angular-2-code-in-es5.html
+		var Service = function() {};
+		Service.prototype.greeting = function() {
+			return 'hello';
+		};
+
+		var Cmp = function(service) {
+			this.greeting = service.greeting();
+		};
+		
+		Cmp.annotations = [
+			new angular.ComponentAnnotation({
+				selector: 'hello-component',
+				injectables: [Service]
+			}),
+			new angular.ViewAnnotation({
+				template: '{{greeting}} world!'
+			})
+		];
+		Cmp.parameters = [[Service]];
+
+		document.addEventListener('DOMContentLoaded', function() {
+			angular.bootstrap(Cmp);
+		});
+	</script>
+	
+</body>
+</html>

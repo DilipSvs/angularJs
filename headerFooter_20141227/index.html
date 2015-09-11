@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- http://embed.plnkr.co/SZwkIQ/preview -->
+<!-- http://gon.to/2013/03/23/the-right-way-of-coding-angularjs-how-to-organize-a-regular-webapp/ -->
+<!-- http://angularjs4u.com/directives/angularjs-basic-footer-directive/ -->
+
+<!-- Login -->
+<!-- http://jasonwatmore.com/post/2014/05/26/AngularJS-Basic-HTTP-Authentication-Example.aspx -->
+<!-- http://arthur.gonigberg.com/2013/06/29/angularjs-role-based-auth/ -->
+
+<html ng-controller="MainCtrl">
+
+	<head>
+		<link rel="stylesheet" href="../library/bootstrap.min.css" />
+
+		<script src="../library/angular.min.js"></script>
+		<script src="../library/angular-ui-router.min.js"></script>
+
+		<script src="script.js"></script>
+	</head>
+
+	<body>
+    
+		<div class="jumbotron">
+			<div class="container">
+				<div class="col-xs-12">
+					<div ui-view></div>
+				</div>
+			</div>
+		</div>
+    
+	</body>
+
+</html>

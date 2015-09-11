@@ -1,0 +1,744 @@
+{
+   "SearchConfig" : {
+      "ConfigByEntity" : [
+         {
+            "Config" : {
+               "ResultList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ],
+               "SearchParamList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ]
+            },
+            "EntityType" : "VolumeGrid"
+         },
+         {
+            "Config" : {
+               "ResultList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ],
+               "SearchParamList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ]
+            },
+            "EntityType" : "SurfaceGrid"
+         },
+         {
+            "Config" : {
+               "ResultList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ],
+               "SearchParamList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ]
+            },
+            "EntityType" : "Geometry"
+         },
+         {
+            "Config" : {
+               "ResultList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ],
+               "SearchParamList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ]
+            },
+            "EntityType" : "Part"
+         },
+         {
+            "Config" : {
+               "ResultList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ],
+               "SearchParamList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ]
+            },
+            "EntityType" : "Configuration"
+         },
+         {
+            "Config" : {
+               "ResultList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ],
+               "SearchParamList" : [
+                  {
+                     "Name" : "Scale"
+                  },
+                  {
+                     "Name" : "DimensionalUnits"
+                  },
+                  {
+                     "Name" : "PlanID"
+                  },
+                  {
+                     "Name" : "PermissionMask"
+                  },
+                  {
+                     "Name" : "ReynoldsNumber"
+                  },
+                  {
+                     "Name" : "Description"
+                  },
+                  {
+                     "Name" : "EntityType"
+                  },
+                  {
+                     "Name" : "Date"
+                  },
+                  {
+                     "Name" : "Configuration"
+                  },
+                  {
+                     "Name" : "VehicleModel"
+                  },
+                  {
+                     "Name" : "Name"
+                  },
+                  {
+                     "Name" : "URL"
+                  },
+                  {
+                     "Name" : "VehicleSubModel"
+                  },
+                  {
+                     "Name" : "Person"
+                  },
+                  {
+                     "Name" : "Time"
+                  },
+                  {
+                     "Name" : "ReferenceDocument"
+                  },
+                  {
+                     "Name" : "ExportControl"
+                  },
+                  {
+                     "Name" : ""
+                  },
+                  {
+                     "Name" : ""
+                  }
+               ]
+            },
+            "EntityType" : "Document"
+         }
+      ]
+   }
+}

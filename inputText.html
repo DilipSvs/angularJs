@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- CSS (load bootstrap) -->
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="../app/styles/bootstrap.min.css"/>
+    
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+	<script data-semver="1.2.21" data-require="angular.js@1.2.21" src="../app/library/angular.min.js"></script>
+</head>
+
+	<body ng-app="textInputExample">
+		<script>
+			//https://docs.angularjs.org/api/ng/input/input%5Btext%5D
+			angular.module('textInputExample', [])
+				.controller('ExampleController', ['$scope', function($scope) {
+					$scope.text = 'guest';
+					$scope.word = /^\s*\w*\s*$/;
+				}]);
+		</script>
+		
+		<form name="myForm" ng-controller="ExampleController">
+			Single word: <input type="text" name="input" ng-model="text"
+						ng-pattern="word" required ng-trim="false">
+			<span class="error" ng-show="myForm.input.$error.required">	Required!</span>
+			<span class="error" ng-show="myForm.input.$error.pattern"> Single word only!</span>
+
+			<br/>
+			<tt>text = {{text}}</tt><br/>
+			<tt>myForm.input.$valid = {{myForm.input.$valid}}</tt><br/>
+			<tt>myForm.input.$error = {{myForm.input.$error}}</tt><br/>
+			<tt>myForm.$valid = {{myForm.$valid}}</tt><br/>
+			<tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
+		</form>
+ 
+	</body>
+ </html>

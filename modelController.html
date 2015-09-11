@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="">
+  <head>
+  
+    <script src="library/angular.min.js"></script>
+	
+  </head>
+  <body>
+	
+	<div ng-controller="personController">
+		<input type="text" ng-model="person.test.firstName">
+	</div>
+	
+		<script>
+		
+			function personController($scope) {
+				var a = "Yovd";
+				$scope.person = {}
+				$scope.person.test = {firstName : a }
+			}
+			
+		</script>
+	</div>
+  </body>
+</html>

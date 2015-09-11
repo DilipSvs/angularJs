@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.1/angular.min.js"></script>
+<meta charset=utf-8 />
+<style type="text/css">
+#container {
+            padding: 20px;
+            font-family: "Calibri", sans-serif;
+        }
+
+        #reservation_form {
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 30px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .sub_section {
+            margin-top: 10px;
+        }
+
+        .error_msg {
+            font-size: 10px;
+            color: #ff0000;
+        }
+
+        .page .section {
+            display: none;
+        }
+
+        .page .section.active {
+            display: block;
+        }
+</style>
+<title>JS Bin</title>
+</head>
+<body>
+  <div id="container" ng-controller="reservationController">
+    <div id="reservation_form">
+        <form name="reserve" class="css_form" novalidate>
+            <div id="page1" class="page active">
+                <div id="purchaser1">
+                    <h4>Purchaser 1</h4>
+
+                    <div id="purchaser1_cat">
+                        <input type="radio" id="purchaser1_individual" name="purchaser1_radio" value="purchaser1.individual"
+                               ng-checked="true" ng-click="showIndividual('#purchaser1_individual_section')">
+                        Individual
+                        <input type="radio" id="purchaser1_company" name="purchaser1_radio" value="purchaser1.company"
+                               ng-click="showCompany('#purchaser1_company_section')">
+                        Company
+                    </div>
+
+                    <div id="purchaser1_individual_section" class="section active">
+                        <div id="purchaser1_individual_title_section" class="sub_section">
+                            Title<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser1.individual.title" id="purchaser1_individual_title" name="purchaser1_individual_title" required />
+                            <span class="error_msg" ng-show="reserve.purchaser1_individual_title.$dirty && reserve.purchaser1_individual_title.$invalid"> This is a required
+                                field</span>
+                        </div>
+                        <div id="purchaser1_individual_firstname_section" class="sub_section">
+                            First Name<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser1.individual.firstName" id="purchaser1_individual_firstname" name="purchaser1_individual_firstname" required/>
+                            <span class="error_msg" ng-show="reserve.purchaser1_individual_firstname.$dirty && reserve.purchaser1_individual_firstname.$invalid"> This is a
+                                required
+                                field</span>
+                        </div>
+                        <div id="purchaser1_individual_email_section" class="sub_section">
+                            Email<span class="asterisk">*</span><br/>
+                            <input type="email" ng-model="user.purchaser1.individual.email" id="purchaser1_individual_email" name="purchaser1_individual_email" required />
+                            <span class="error_msg" ng-show="reserve.purchaser1_individual_email.$dirty && reserve.purchaser1_individual_email.$invalid"> This is a required
+                                field</span>
+                        </div>
+                    </div>
+
+                    <div id="purchaser1_company_section" class="section">
+                        <div id="purchaser1_company_address_section" class="sub_section">
+                            Address<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser1.company.address" id="purchaser1_company_address" name="purchaser1_company_address"/>
+                        </div>
+                        <div id="purchaser1_company_suburb_section" class="sub_section">
+                            Suburb<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser1.company.suburb" id="purchaser1_company_suburb" name="purchaser1_company_suburb"/>
+                        </div>
+                        <div id="purchaser1_individual_state_section" class="sub_section">
+                            State<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser1.company.state" id="purchaser1_company_state" name="purchaser1_company_state"/>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <button id="next" ng-click="showNext('#page2')" ng-disabled="isValid()">Next Page</button>
+            </div>
+
+            <div id="page2" class="page">
+                <div id="purchaser2">
+                    <h4>Purchaser 2</h4>
+
+                    <div id="purchaser2_cat">
+                        <input type="radio" id="purchaser2_individual" name="purchaser2_radio" value="purchaser2.individual"
+                               ng-checked="true" ng-click="showIndividual('#purchaser2_individual_section')">
+                        Individual
+                        <input type="radio" id="purchaser2_company" name="purchaser2_radio" value="purchaser2.company"
+                               ng-click="showCompany('#purchaser2_company_section')"> Company
+                    </div>
+                    <div id="purchaser2_individual_section" class="section active">
+                        <div id="purchaser2_individual_title_section" class="sub_section">
+                            Title<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser2.individual.title" id="purchaser2_individual_title" name="purchaser2_individual_title"/>
+                        </div>
+                        <div id="purchaser2_individual_firstname_section" class="sub_section">
+                            First Name<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser2.individual.firstName" id="purchaser2_individual_firstname" name="purchaser2_individual_firstname"/>
+                        </div>
+                        <div id="purchaser2_individual_email_section" class="sub_section">
+                            Email<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser2.individual.email" id="purchaser2_individual_email" name="purchaser2_individual_email"/>
+                        </div>
+                    </div>
+                    <div id="purchaser2_company_section" class="section">
+                        <div id="purchaser2_company_address_section" class="sub_section">
+                            Address<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser2.company.address" id="purchaser2_company_address" name="purchaser2_company_address"/>
+                        </div>
+                        <div id="purchaser2_company_suburb_section" class="sub_section">
+                            Suburb<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser2.company.suburb" id="purchaser2_company_suburb" name="purchaser2_company_suburb"/>
+                        </div>
+                        <div id="purchaser2_individual_state_section" class="sub_section">
+                            State<span class="asterisk">*</span><br/>
+                            <input type="text" ng-model="user.purchaser2.company.state" id="purchaser2_company_state" name="purchaser2_company_state"/>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button id="previous" ng-click="showPrevious('#page1')">Previous Page</button>
+              <br>              
+            </div>
+          {{user}}
+        </form>
+    </div>
+</div>
+
+<script>
+function reservationController($scope) {
+	$scope.master = {};
+
+	$scope.update = function(user) {
+		$scope.master = angular.copy(user);
+	};
+
+	$scope.reset = function() {
+		$scope.user = angular.copy($scope.master);
+	};
+
+	$scope.showNext = function(pageId) {
+		$('#page1').removeClass('active');
+		$(pageId).addClass('active');
+	};
+
+	$scope.showPrevious = function(pageId) {
+		$('#page2').removeClass('active');
+		$(pageId).addClass('active');
+	};
+
+	$scope.isValid = function() {
+		var valid = $('#page1').find('input').hasClass('ng-invalid');
+		return valid;
+	};
+
+	$scope.showIndividual = function(sectionId) {
+		$(sectionId).addClass('active');
+		$('#purchaser1_company_section').removeClass('active');
+	};
+
+	$scope.showCompany = function(sectionId) {
+		$('#purchaser1_individual_section').removeClass('active');
+		$(sectionId).addClass('active');
+	};
+
+	$scope.reset();
+}
+</script>
+
+</body>
+</html>

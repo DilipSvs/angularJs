@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="../library/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+	<div ng-controller="Controller">
+		<my-dialog>Check out the contents, {{name}}!</my-dialog>
+	</div>
+
+	<script>
+		app = angular.module('myApp', [])
+
+		.controller('Controller', ['$scope', function($scope) {
+			$scope.name = 'Angular';
+		}])
+	
+		.directive('myDialog', function() {
+			return {
+				restrict: 'E',
+				transclude: true,
+				//templateUrl: 'my-dialog.html'
+				template: '<div class="alert" ng-transclude></div>'
+			};
+		});
+	</script>
+
+</body>
+
+</html>

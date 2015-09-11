@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Check box select all</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="MainCtrl">
+        <select-all-checkbox checkboxes="ListOfItems" all-selected="AllSelectedItems"
+        all-clear="NoSelectedItems"></select-all-checkbox>select all
+        <div ng-repeat="item in ListOfItems">
+            <input type="checkbox" ng-model="item.isSelected" />{{item.desc}}</div>
+        <p>All selected : {{AllSelectedItems}}</p>
+        <p>None selected : {{NoSelectedItems}}</p>
+    </div>
+	<<script type="text/javascript">
+	
+	//http://jsfiddle.net/ctesene/9f2rA/5/light/
+	
+	angular.module('myApp', []);
+
+function MainCtrl($scope) {
+    $scope.ListOfItems = [{
+        isSelected: true,
+        desc: "Donkey"
+    }, {
+        isSelected: false,
+        desc: "Horse"
+    }];
+
+    $scope.AllSelectedItems = false;
+    $scope.NoSelectedItems = false;
+}
+
+angular.module('myApp').directive('selectAllCheckbox', function () {
+    return {
+        replace: true,
+        restrict: 'E',
+        scope: {
+            checkboxes: '=',
+            allselected: '=allSelected',
+            allclear: '=allClear'
+        },
+        template: '<input type="checkbox" ng-model="master" ng-change="masterChange()">',
+        controller: function ($scope, $element) {
+
+            $scope.masterChange = function () {
+                if ($scope.master) {
+                    angular.forEach($scope.checkboxes, function (cb, index) {
+                        cb.isSelected = true;
+                    });
+                } else {
+                    angular.forEach($scope.checkboxes, function (cb, index) {
+                        cb.isSelected = false;
+                    });
+                }
+            };
+
+            $scope.$watch('checkboxes', function () {
+                var allSet = true,
+                    allClear = true;
+                angular.forEach($scope.checkboxes, function (cb, index) {
+                    if (cb.isSelected) {
+                        allClear = false;
+                    } else {
+                        allSet = false;
+                    }
+                });
+
+                if ($scope.allselected !== undefined) {
+                    $scope.allselected = allSet;
+                }
+                if ($scope.allclear !== undefined) {
+                    $scope.allclear = allClear;
+                }
+
+                $element.prop('indeterminate', false);
+                if (allSet) {
+                    $scope.master = true;
+                } else if (allClear) {
+                    $scope.master = false;
+                } else {
+                    $scope.master = false;
+                    $element.prop('indeterminate', true);
+                }
+
+            }, true);
+        }
+    };
+});
+	</script>
+</body>
+</html>

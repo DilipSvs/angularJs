@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="plunker" >
+<head>
+  <meta charset="utf-8">
+  <title>AngularJS disable Btn until selected dropdown value</title>
+  <script>document.write("<base href=\"" + document.location + "\" />");</script>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+<form name="form">
+  <select ng-model="color" ng-options="c.name for c in colors"></select><br>
+  <button ng-disabled="form.$invalid || reqColor()">Save</button>
+  </form>
+  
+  <script>
+	var app = angular.module('plunker', []);
+
+		app.controller('MainCtrl', function($scope) {
+		  $scope.colors = [{name: 'blue'}, {name:'red'}, {name:'yellow'}];
+		  
+		  $scope.reqColor = function() {
+			if ($scope.color && $scope.color.name && $scope.color.name != 'blue') return false;
+			return true;
+		  }
+		});
+  </script>
+</body>
+</html>

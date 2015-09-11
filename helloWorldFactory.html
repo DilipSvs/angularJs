@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<title>AngularJS HelloWorld and Factory</title>
+	 
+	<head>
+		<script src="library/angular.min.js"></script>
+	</head>
+ 
+	<body ng-app = "myApp">
+		<div ng-controller = "ctrl"> 
+			{{name}} <br/>
+			<b>{{nameFactory }}</b> <br/>
+			<i>{{nameFactory1}}</i> <br/>
+		</div>
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				console.log( 'Dom content loaded' );
+			})
+			var myApp = angular.module('myApp',[]);
+			
+			// define a constant
+			myApp.constant( 'usersURL', 'users.json' );
+			myApp.constant( 'usersURL1', 'users1.json' );
+									
+			myApp.controller('ctrl', ['$scope', '$compile', 'CRUDService', 'usersURL', 'usersURL1', function( s, compile, c, url, url1 ) {
+				s.name = "Hello World";
+				//$("#my").append( compile("<script src='includeDyn.js'>")(s) );
+				c.getMethod( url ).then( function( data ) {
+					console.log( url );
+					s.nameFactory  = data;
+				});
+				c.getMethod( url1 ).then( function( data ) {
+					console.log( url1 );
+					s.nameFactory1 = data;
+				});				
+				
+				//s.nameFactory = c();
+			}]);
+			
+			myApp.factory('httpTimestampInterceptor', [ '$q', '$window', function( $q, $window ) {
+				return {
+					// optional method
+					'request': function( config ) {
+						// do something on success
+						var timestamp = Date.now();
+						config.url = config.url + "?x=" + timestamp;
+						console.log( config );
+						// Return the config or wrap it in a promise if blank.
+						return config || $q.when(config);
+					},
+					'requestError': function( rejection ) {
+						console.log( rejection );
+						// Return the promise rejection.
+						return $q.reject( rejection );
+					},
+					'response': function( response ) {
+						// do something on success
+						console.log( response );
+						
+						// Return the response or promise.
+						 return response || $q.when(response);
+					},
+					'responseError': function( rejection ) {
+						console.log( 'rejection' );
+						console.log( rejection.status );
+						
+						//if( response.status == 401 ) $window.location.href = "http://www.google.com";
+						// Return the promise rejection.
+						return $q.reject( rejection );
+					}
+				}
+			}]);
+			
+			myApp.config( [ '$httpProvider', function ( $httpProvider ) {
+				// Add the interceptor to the $httpProvider.
+				$httpProvider.interceptors.push('httpTimestampInterceptor');
+			}]);
+				
+			myApp.factory( 'CRUDService', ['$q', '$http', function( $q, $http ) {				
+				return {
+					getMethod : function( url ) {
+						var deferred = $q.defer();
+
+						$http.get( url ).
+							success( function( data, status, headers, config ) {
+								deferred.resolve( data );
+							}).
+							error( function( data, status, headers, config ) {
+								deferred.reject([data,status,headers,config]);
+							});
+
+						return deferred.promise;
+					}
+				};
+				/*return new function() {
+
+					this.getMethod = function( url ) {
+						var deferred = $q.defer();
+
+						$http.get( url ).
+							success(function(data, status, headers, config) {
+								deferred.resolve( data );
+							}).
+							error(function(data, status, headers, config) {
+								deferred.reject([data,status,headers,config]);
+							});
+
+						return deferred.promise;
+					}
+
+				};*/
+				}]);
+				
+			/*myApp.factory('factoryAPI', ['$log', function( $log ) {
+				return function() {
+					return "Hello World from factory";
+				}				
+			}]);*/
+
+		</script>
+	</body>
+</html>

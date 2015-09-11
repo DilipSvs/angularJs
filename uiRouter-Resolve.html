@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+ <head>
+    <script src="library/angular.min.js"></script>
+    <script src="library/angular-ui-router.min.js"></script>
+  </head>
+<body ng-app="myApp">
+	<div ui-view="content"></div>
+	
+	<script type="text/javascript">
+		 //http://www.jvandemo.com/how-to-resolve-application-wide-resources-centrally-in-angularjs-with-ui-router/
+		
+		angular.module('myApp', ['ui.router'])
+			.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+				$urlRouterProvider.otherwise('/');
+				$stateProvider
+					.state('home', {
+						url: '/',
+						views: { content: {
+							template: '<h1>Hejsan!</h1><a href ui-sref="p.a">p.a</a><br><a href ui-sref="p.b">p.b</a><br><a href ui-sref="a">a</a><br><a href ui-sref="b">b</a><br>'
+						} }
+					})
+					.state('p', {
+						url: '/p',
+						abstract: true,
+						resolve: { data: function () { return {a: 'aAa', b: 'bBb'}; } }
+					})
+				
+					.state('p.a', {
+						url: '/a',
+						resolve: { a: function (data) { return data.a; } },
+						views: { 'content@': {
+							template: '<h1>Titta: {{ a }}</h1>',
+							controller: function ($scope, a) { console.log('p.a.'); $scope.a = a; }
+						} }
+					})
+					.state('p.b', {
+						url: '/b',
+						resolve: { b: function (data) { return data.b; } },
+						views: { 'content@': {
+							template: '<h1>Titta: {{ b }}</h1>',
+							controller: function ($scope, b) { $scope.b = b; }
+						} }
+					})
+				
+					.state('a', {
+						url: '/a',
+						resolve: {
+							data: function () { return {a: 'aAa', b: 'bBb'}; },
+							a: function (data) { return data.a; }
+						},
+						views: { content: {
+							template: '<h1>Titta: {{ a }}</h1>',
+							controller: function ($scope, a) { $scope.a = a; }
+						} }
+					})
+					.state('b', {
+						url: '/b',
+						resolve: {
+							data: function () { return {a: 'aAa', b: 'bBb'}; },
+							b: function (data) { return data.b; }
+						},
+						views: { content: {
+							template: '<h1>Titta: {{ b }}</h1>',
+							controller: function ($scope, b) { $scope.b = b; }
+						} }
+					})
+				;
+			}]);
+
+	</script>
+</body>
+</html>

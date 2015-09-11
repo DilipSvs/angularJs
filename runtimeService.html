@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+ <head>
+    <script src="library/angular.min.js"></script>
+  </head>
+<body ng-app="myApp">
+	 <div ng-controller="myController">
+        <h1>{{yell}}</h1>
+    </div>
+	
+	<script type="text/javascript">
+		var app = angular.module('myApp', []);
+
+		// Dependencies are possible here, no problem
+		app.service('fooService', ['$location', function($location) {
+			this.yell = function() {
+				return 'THIS IS FOO';
+			}
+		}]);
+
+		app.service('barService', ['$location', function($location) {
+			this.yell = function() {
+				return 'THIS IS BAR';
+			}
+		}]);
+
+		// Here you can only inject providers and constants
+		app.provider('yell', function() {
+			
+			this.setProvider = function(provider) {
+				this.yellProvider = provider;
+			};
+			
+			// Injection of Service gets possible here since the config phase is over at this point in time
+			this.$get = ['fooService', 'barService', function(fooService, barService) {
+				
+				if(this.yellProvider === 'foo') {
+					return fooService;
+				}
+				
+				if(this.yellProvider === 'bar') {
+					return barService;
+				}
+				
+				throw 'No yell Service available';
+			}];
+		});
+
+		app.config(['yellProvider', function(yellProvider) {
+			yellProvider.setProvider('foo')
+		}]);
+
+		app.controller('myController', ['$scope', 'yell', function($scope, yell) {
+			$scope.yell = yell.yell();
+		}]);
+
+	</script>
+</body>
+</html>

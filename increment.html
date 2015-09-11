@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script data-semver="1.2.21" data-require="angular.js@1.2.21" src="library/angular.min.js"></script>
+  <meta charset="utf-8">
+  <title>Counter</title>
+</head>
+<body ng-app='myApp'>
+  <div ng-controller='HomeController'>
+    <div ticker ng-model="val"></div>
+    <div ticker ng-model="val"></div>
+  </div>
+
+  <script type="text/javascript">
+  
+  // http://jsbin.com/zohur/1/edit
+	angular.module('myApp', [])
+		.directive('ticker', function() {
+		  return {
+			restrict: 'A',
+			template: '<h2 ng-click="update()">{{ ngModel }}</h2>',
+			scope: {
+			  ngModel: '='
+			},
+			controller: ['$scope', function(scope) {
+			  scope.$watch('ngModel', function(n) {
+				if (!n) return;
+				console.log("not undefined");
+			  });
+			  scope.update = function() {
+				scope.ngModel += 10;
+			  }
+			}]
+		  }
+		})
+		.controller('HomeController', function($scope, $timeout) {
+		  $scope.val = 1;
+		  var ticker = function() {
+			$timeout(function() {
+			  $scope.val += 1;
+			  ticker();
+			}, 1000);
+		  }
+		  ticker();
+		});
+  </script>
+  </body>
+</html>

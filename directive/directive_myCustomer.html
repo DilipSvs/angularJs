@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="../library/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+	<div ng-app="HelloApp">
+    <hello-world name="John Lindquist"></hello-world>
+    <div ng-controller="mainCtl">
+        <serial-checkbox-table title="Table title" columns="5" ng-model="items"></serial-checkbox-table>
+        <br />
+        {{items}}
+        <br/><br/>
+        <button ng-click="updateModel()">Update Model</button>        
+        <button ng-click="updateModel2()">Update Model 2</button>        
+        
+    </div>
+</div>
+	
+	<script>
+		app = angular.module('myApp', [])
+		
+		angular.module('components', [])
+		.directive("serialCheckboxTable", function($compile){
+			return {
+				restrict: "E",
+				require:'ngModel',
+				link: function($scope, $element, $attrs){
+					// Do some validation for title and columns parameters
+					$attrs.columns = ($attrs.hasOwnProperty('columns') && $attrs.columns != '')? $attrs.columns:1;
+					$attrs.title = ($attrs.hasOwnProperty('title') && $attrs.title != '')? $attrs.title:'&nbsp;';
+					
+					var compiledTable;
+					$scope.$watch($attrs.ngModel,function(newVal,oldVal){
+						//var model = $scope.$eval($attrs.ngModel);
+						// can just take model value from watch function result
+						var model = newVal;
+						//model = model.sort(dynamicSort("label"));
+
+						var body = '<table border="1" cellclass="ref-list-table" style="text-align: left; width: 100%;">'+
+								  '<thead>'+
+								   '<tr>'+
+									 '<th style="text-align: center;" colspan="'+$attrs.columns+'">'+$attrs.title+'</th>'+
+									'</tr>'+
+								  '</thead>'+
+								 '<tbody>';
+						angular.forEach(model, function(section, i){
+							if(i % $attrs.columns == 0 && i == 0){
+								body = body.concat("<tr>");
+							}else if(i % $attrs.columns == 0 && i > 0){
+								body = body.concat("</tr><tr>");
+							}
+							body = body.concat("<td><input ng-model='"+$attrs.ngModel+"["+i+"].selected' type='checkbox'> "+section.label.replace(/_/g," ")+"</td>");
+
+							if(i == model.length - 1){
+								body = body.concat("</tr>");
+							}
+						});
+						body = body.concat('</tbody></table>');
+
+						if (!compiledTable) {
+							compiledTable = $compile(body)($scope);
+							$element.replaceWith(compiledTable);
+						} else {
+							var oldCompiledTable = compiledTable;
+							compiledTable = $compile(body)($scope);
+							oldCompiledTable.replaceWith(compiledTable);
+						}
+						
+					});
+				},
+				controller: function($scope, $element, $attrs){}
+			}
+		});
+		angular.module('myApp', ['components'])
+		.controller('mainCtl', function ($scope) {
+			$scope.updateModel = function(){
+				//$scope.items[0].selected = !$scope.items[0].selected;
+				$scope.items = $scope.moreItems;
+			}
+			$scope.updateModel2 = function(){
+				//$scope.items[0].selected = !$scope.items[0].selected;
+				$scope.items = $scope.evenMoreItems;
+			}
+			$scope.items = [
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true},
+						{label:'item 1', selected:true}
+					];
+				$scope.moreItems = [
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true}
+					];
+				$scope.evenMoreItems = [
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item y', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true},
+						{label:'item x', selected:true}
+					];
+		});
+	</script>
+
+</body>
+
+</html>

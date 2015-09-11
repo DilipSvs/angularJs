@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="formApp">
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+  </head>
+  <body>
+
+  <div ng-controller="Ctrl">
+  <form name="myForm" ng-submit="processForm()" >
+
+  <hr>
+    <select name="service_id" class="Sitedropdown" style="width: 220px;" 
+            ng-model="formData.ServiceID" 
+            ng-options="service.ServiceID as service.ServiceName for service in services"
+            required> 
+      <option value="">--Select Service--</option> 
+    </select> 
+    <span class="error" ng-show="myForm.service_id.$dirty && myForm.service_id.$invalid">Select service</span>
+  <hr>
+  
+  <tt>ServiceID = {{formData.ServiceID}}</tt>
+  </br>
+  <!-- SUBMIT BUTTON -->
+		<button type="submit" class="btn btn-primary" >Submit</button>
+
+  </form>
+  </div>
+  
+	<script>
+		//http://stackoverflow.com/questions/15360094/angularjs-dropdown-required-validation
+		var formApp = angular.module('formApp', []);
+		
+		function Ctrl($scope) {
+		  $scope.services = [
+			{ServiceID: 1, ServiceName: 'Service1'},
+			{ServiceID: 2, ServiceName: 'Service2'},
+			{ServiceID: 3, ServiceName: 'Service3'}
+		  ];
+		  
+		  $scope.formData = {};
+				
+			$scope.processForm = function(){
+				console.log( $scope.formData );
+			}
+		
+		}
+	</script>
+
+  </body>
+</html>

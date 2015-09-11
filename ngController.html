@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script data-semver="1.2.21" data-require="angular.js@1.2.21" src="library/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller = "myCtrl">
+		{{greet}}
+	</div>
+	<div my-dir></div>
+	
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+		
+		myApp.service('myService', function(){
+			this.hardCodeValue = "hardCode Value";
+		})
+		
+		myApp.controller("myCtrl",[ "$scope", function($scope){
+			$scope.greet = "Welcome!";
+		}]);
+		
+		myApp.directive("myDir",  function(){
+			return{
+				template:"<div>{{name}} --- {{value}}</div>",
+				controller: ['$scope', 'myService', function($scope, myService){
+					$scope.fn = function( name ){
+						$scope.name = name;
+						$scope.value = myService.hardCodeValue;
+					};
+				}],
+				link:function(scope, elem, attr){
+					scope.fn( "Hello Mr. Dubuk" );
+				}
+			}
+		} )
+	</script>
+</body>
+</html>

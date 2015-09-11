@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularjs-starter">
+	<title>AngularJS $watch vs $observe</title>
+	 
+	<head>
+		<script src="library/angular.min.js"></script>
+		<script>
+      document.write('<base href="' + document.location + '" />');
+    </script>
+	</head>
+ 
+	<body ng-controller = "MainCtrl">
+		<h3>$observe and $watch for directive attributes</h3>
+		<div d1 attr1="{{prop1}}-test" attr2="prop2" attr3="33" attr4="'a_string'" attr5="a_string" attr6="{{1+aNumber}}"></div>
+		<div d2 attr1="{{prop1}}-test" attr2="prop2" attr3="33" attr4="'a_string'" attr5="a_string" attr6="{{1+aNumber}}"></div>
+		<div d3 attr1="obj.prop1"></div>
+		<a ng-click="changeProperties()">change properties</a>
+		<p>Please see the console log for output.</p>
+		
+		<script>
+			//http://stackoverflow.com/questions/14876112/difference-between-the-observe-and-watch-methods
+			var app = angular.module('angularjs-starter', []);
+
+			app.controller('MainCtrl', function($scope) {
+			  $scope.prop1 = 'scope_prop1';
+			  $scope.prop2 = 'scope_prop2';
+			  $scope.aNumber = 44;
+			  $scope.obj = { prop1: "obj_prop1"}
+			  $scope.changeProperties = function() {
+				$scope.prop1 = 'scope_prop1_changed';
+				$scope.prop2 = 'scope_prop2_changed';
+				$scope.aNumber += 1;
+			  };
+			});
+
+			//<div d1 attr1="{{prop1}}-test" attr2="prop2" attr3="33" attr4="'a_string'" attr5="a_string" attr6="{{1+aNumber}}"></div>
+			app.directive('d1', function() {
+			return {
+			  compile: function(tElement, tAttrs) {
+				  console.log('d1-compile:', tAttrs.attr1, tAttrs.attr2, tAttrs.attr3, tAttrs.attr4, tAttrs.attr5, tAttrs.attr6);
+				  return function link(scope, iElement, iAttrs) {
+					console.log('d1-link:', iAttrs.attr1, iAttrs.attr2, iAttrs.attr3, iAttrs.attr4, iAttrs.attr5, tAttrs.attr6);
+					scope.$watch(iAttrs.attr1, function(value) { console.log('d1-watch a1:', value); });
+					scope.$watch(iAttrs.attr2, function(value) { console.log('d1-watch a2:', value); });
+					scope.$watch(iAttrs.attr3, function(value) { console.log('d1-watch a3:', value); });
+					scope.$watch(iAttrs.attr4, function(value) { console.log('d1-watch a4:', value); });
+					scope.$watch(iAttrs.attr5, function(value) { console.log('d1-watch a5:', value); });
+					scope.$watch(iAttrs.attr6, function(value) { console.log('d1-watch a6:', value); });
+					iAttrs.$observe('attr1', function(value) { console.log('d1-obsrv a1:', value); });
+					iAttrs.$observe('attr2', function(value) { console.log('d1-obsrv a2:', value); });
+					iAttrs.$observe('attr3', function(value) { console.log('d1-obsrv a3:', value); });
+					iAttrs.$observe('attr4', function(value) { console.log('d1-obsrv a4:', value); });
+					iAttrs.$observe('attr5', function(value) { console.log('d1-obsrv a5:', value); });
+					iAttrs.$observe('attr6', function(value) { console.log('d1-obsrv a6:', value); });
+				};
+			  }
+			};
+			});
+
+			//<div d1 attr1="{{prop1}}-test" attr2="prop2" attr3="33" attr4="'a_string'" attr5="a_string" attr6="{{1+aNumber}}"></div>
+			app.directive('d2', function() {
+			return {
+			  scope: { 
+				isolate_prop1: '@attr1',
+				isolate_prop2: '=attr2',
+				isolate_prop3: '@attr3',
+				isolate_prop4: '@attr4',
+				isolate_prop5: '@attr5',
+				isolate_prop6: '@attr6'
+			  },
+			  compile: function(tElement, tAttrs) {
+				  console.log('d2-compile tAttrs:', tAttrs.attr1, tAttrs.attr2, tAttrs.attr3, tAttrs.attr4, tAttrs.attr5, tAttrs.attr6);
+				  return function link(scope, iElement, iAttrs) {
+					console.log('d2-link iAttrs:', iAttrs.attr1, iAttrs.attr2, iAttrs.attr3, iAttrs.attr4, iAttrs.attr5, tAttrs.attr6);
+					console.log('d2-link isolate:', scope.isolate_prop1, scope.isolate_prop2, scope.isolate_prop3, scope.isolate_prop4, scope.isolate_prop5);
+					scope.$watch('isolate_prop1', function(value) { console.log('d2-watch ip1:', value); });
+					scope.$watch('isolate_prop2', function(value) { console.log('d2-watch ip2:', value); });
+					scope.$watch('isolate_prop3', function(value) { console.log('d2-watch ip3:', value); });
+					scope.$watch('isolate_prop4', function(value) { console.log('d2-watch ip4:', value); });
+					scope.$watch('isolate_prop5', function(value) { console.log('d2-watch ip5:', value); });
+					scope.$watch('isolate_prop6', function(value) { console.log('d2-watch ip6:', value); });
+					iAttrs.$observe('attr1', function(value) { console.log('d2-obsrv a1:', value); });
+					iAttrs.$observe('attr2', function(value) { console.log('d2-obsrv a2:', value); });
+					iAttrs.$observe('attr3', function(value) { console.log('d2-obsrv a3:', value); });
+					iAttrs.$observe('attr4', function(value) { console.log('d2-obsrv a4:', value); });
+					iAttrs.$observe('attr5', function(value) { console.log('d2-obsrv a5:', value); });
+					iAttrs.$observe('attr6', function(value) { console.log('d2-obsrv a6:', value); });
+				};
+			  }  
+			};
+			});
+			app.directive('d3', function() {
+			  return function(scope, element, attrs){
+				scope.$watch(attrs.attr1, function(val) {
+				  console.log('d3-watch', val);
+				});
+			  };
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+<form name="filterCFD">
+<div class="container" ng-controller="searchCtrl">
+
+	<!-- search heading-->
+	<div class="container" style="background:#fff; padding:10px;">
+		<div class="row">
+			<div class="col-xs-11"><h4>SEARCH</h4></div>
+			<div class="col-xs-1"><button class="btn btn-primary" style="width:20px;height:30px;" ng-click="isSearchOptionCollapsed = !isSearchOptionCollapsed">
+				<span class="glyphicon glyphicon-asterisk"></span>
+			</button></div>
+		</div>
+
+		<div collapse="isSearchOptionCollapsed" style="float:left">
+			<div class="floatLeft" data-ng-repeat="item in jsonSearch">
+				<input type="checkbox" ng-model="item.selected" ng-init="item.selected"> {{item.name}}</input>
+			</div> 
+		</div>
+		
+		<div data-ng-repeat="item in jsonSearch">
+			<div ng-show="item.selected" class="pull-left" style="width:15%; margin: 10px; padding: 10px; background: #a5acb0;">
+				{{item.name}} 
+				<input type="text" name="item" ng-model="item.value" placeholder="{{item.name}}">
+			</div>
+		</div>
+
+		<div ng-show="chkSearchSelected == 0" style="background:#ddd; padding:10px; width:350px;">Please select one/more SEARCH option(s) </div>
+		
+		<div class="col-xs-12">
+			<button ng-click="searchAll( )"  class="btn btn-primary" >Search</button>
+		</div>	
+
+	</div><!--search-->
+	
+	<div style="height:5px"></div>
+	
+	<!--search result-->
+	<div ng-show="toshow" class="container" style="background:#fff; padding:10px;">
+		<div class="row">
+			<div class="col-xs-11"><h4>RESULT</h4></div>
+			<div class="col-sm-1"><button class="btn btn-primary" style="width:20px;height:30px;" ng-click="isResultOptionCollapsed = !isResultOptionCollapsed">
+				<span class="glyphicon glyphicon-wrench"></span>
+			</button></div>
+		</div>
+		
+		<div ng-show="chkTableSelected  == 0" style="background:#ddd; padding:10px; width:350px;">Please select one/more RESULT option(s) </div>
+		
+		<!-- checkbox for select all-->
+		<div collapse="isResultOptionCollapsed">
+			<div class="floatLeft" data-ng-repeat="item in jsonResult">
+				<input type="checkbox" ng-model="item.selected" ng-change="change()" ng-init="item.selected"> {{item.name}}</input>
+			</div>
+		</div>
+		
+		<!--parent header-->
+		<div class="col-xs-12" style="overflow-x:auto;" ng-show="chkTableSelected  > 0">
+			<table class="table table-bordered table-striped">
+				<thead class="levelOne">
+				 <tr ng-show="jsonResult.length > 0">
+					<th></th>
+					<th data-ng-repeat="item in jsonResult" ng-show="item.selected">{{item.name}}</th>
+				</tr>
+				</thead>
+				
+				<!--parent content -->
+				<tbody data-ng-repeat = "rows in global" data-ng-switch on="nameListDataCollapse[$index]" >
+					<tr class="clickableRow" data-ng-click="selectTableRow( $index )">
+						<td width=20 ><a>
+							 <img class="commercial" ng-src="{{rows.imgUrl}}"/>
+							</a></td>
+						<td data-ng-repeat = "(key,val) in rows" ng-if="val.selected" >
+							<div>{{val.value}}</div>
+						</td>
+					</tr>
+					<!--child content -->
+					<tr data-ng-switch-when="true">
+					<!--tr-->
+						<td colspan="9">
+							<div><input type="checkbox" ng-model="selectedAll" ng-click="checkAll( $index )" ng-checked="allNeedsMet( $index )"/>Select All</div>
+							<table class="table table-condensed table-bordered table-responsive">
+								<thead class="levelTwo">
+									<tr>
+										<th> </th>
+										<th> Name</th>
+										<th> Available</th>
+									</tr>
+								</thead>
+									<tr data-ng-repeat="nameListData in rows.child">
+										<td width="20"><input id="{{nameListData}}" type="checkbox" ng-model="nameListData.selected"/></td>
+										<td>{{nameListData.name}}</td>
+										<td>{{nameListData.value}}</td>
+									</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+			<div class="col-xs-12" style="padding: 5px; margin-left: 10px;">
+				<button ng-click="get()" class="btn btn-primary" >Get</button>
+			</div>
+		<!--div ng-show="jsonResult.length == 0">No Data Available</div>
+		<div ng-show="chkTableSelected == 0">No Data Available</div-->
+	</div><!--toshow-->
+	
+	</div>
+	</form>

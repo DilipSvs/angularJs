@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+ <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+  </head>
+<body ng-app="app">
+	<div ng-controller="ctrl">
+		<div super test="{{ctrlTest}}">
+			<input type="text" ng-model="test" />
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var app = angular.module( "app", [] );
+		
+		app.controller( "ctrl", function($scope){
+			$scope.ctrlTest = "Yov";
+		});
+		
+		app.directive( "super", function(){
+			return{
+				restrict:"A",
+				scope:{
+					test:"@"
+				}
+			}
+		})
+	</script>
+</body>
+</html>

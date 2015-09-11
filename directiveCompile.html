@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="library/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+	<level-one>
+		<level-two>
+			<level-three>
+			</level-three>
+		</level-two>
+	</level-one>
+	
+	<script>
+		//http://www.jvandemo.com/the-nitty-gritty-of-compile-and-link-functions-inside-angularjs-directives/
+		app = angular.module('myApp', [])
+		
+		function createDirective(name){  
+		  return function(){
+			return {
+			  restrict: 'E',
+			  compile: function(tElem, tAttrs){
+				console.log(name + ': compile => ' + tElem.html());
+				return {
+				  pre: function(scope, iElem, iAttrs){
+					console.log(name + ': pre link => ' + iElem.html());
+				  },
+				  post: function(scope, iElem, iAttrs){
+					console.log(name + ': post link => ' + iElem.html());
+				  }
+				}
+			  }
+			}
+		  }
+		}
+
+		app.directive('levelOne', createDirective('levelOne'));  
+		app.directive('levelTwo', createDirective('levelTwo'));  
+		app.directive('levelThree', createDirective('levelThree'));
+	</script>
+
+</body>
+
+</html>

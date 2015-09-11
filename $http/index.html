@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<!--http://plnkr.co/edit/o4XB8E52BP0IdmTwu1Gl?p=preview-->
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>$http Promises</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        .descriptionheader {
+            padding: 10px 20px;
+            background: lightsteelblue;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body ng-app="app">
+    <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"
+                   href="http://weblog.west-wind.com/posts/2014/Oct/24/AngularJs-and-Promises-with-the-http-Service"
+                   style="font-size: 1.5em">
+                    <i class="fa fa-eye"></i> $http and Promises
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="http://weblog.west-wind.com/posts/2014/Oct/24/AngularJs-and-Promises-with-the-http-Service"><i class="fa fa-book"></i> Blog Post</a></li>
+                    <li><a href="index.htm"><i class="fa fa-refresh"></i> Refresh Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <aside class="descriptionheader">
+        This sample demonstrates using $http Promises to notify an Angular controller
+        of updated data.
+    </aside>
+
+
+    <div class="container" ng-controller="albumsController as view" style="padding: 20px;">
+            
+        <div class="btn-group" data-toggle="buttons-radio">
+            
+            <button type="button" id="simpleMode" name="simpleMode"
+                    value="true" data-toggle="button" ng-class="{active: view.simpleMode}"
+                    class="btn btn-primary" ng-click="view.toggleSimpleMode(true)">
+                Plain $http
+            </button>                
+            <button type="button" id="simpleMode" name="simpleMode"
+                    value="false" class="btn btn-primary"
+                    ng-class="{active: !view.simpleMode}"
+                    ng-click="view.toggleSimpleMode(false)">
+                Wrapper Promise
+            </button>
+        </div>
+
+
+
+        <ul class="list-group" style="margin-top: 20px;">
+            <li class="list-group-item" ng-repeat="album in view.albums">
+                {{album.albumName}} <i class="pull-right">{{album.year}}</i>
+        </ul>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+a

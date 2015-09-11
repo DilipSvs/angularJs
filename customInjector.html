@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="library/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+	<div id="div1" ng-controller="MyCtrl">
+		<button ng-click="doSomething()">increment</button>
+			WITH    using Injector: {{ value() }}<br/>
+			WITHOUT using Injector:{{ myVal() }}
+	</div>
+
+	<script>
+		//http://stackoverflow.com/questions/14415845/angularjs-dynamically-inject-scope-or-controller
+		var myApp = angular.module('myApp',[]);
+		myApp.service('s1', function() {
+			this.value = 22;
+		});
+
+		function MyCtrl($scope, $injector, s1) {
+			$scope.doSomething = function() {
+				var s1 = $injector.get('s1')
+				s1.value += 10
+			}
+			$scope.value = function() {
+				var s1 = $injector.get('s1')
+				return s1.value
+			}
+			$scope.myVal = function () {
+				return s1.value;
+			}
+		}
+	</script>
+	
+</body>
+</html>

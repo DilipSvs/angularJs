@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="library/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+	<div ng-controller="MyController">
+    <input type="text" ng-model="selectedCityId" />
+    <ul>
+        <li ng-repeat="shop in shops | filter: { locations: [{ city_id: selectedCityId }] }">
+            {{ shop }}
+        </li>
+		<!--li ng-repeat="shop in shops | filter: { locations: [{ city_id: search.locations.city_id }] }"-->
+    </ul>
+</div>
+	
+	<script>
+		//http://stackoverflow.com/questions/18504779/angularjs-filter-nested-object
+		//http://jsfiddle.net/suCWn/12/
+		var myApp = angular.module('myApp', []);
+
+		myApp.controller('MyController', function ($scope) {
+		$scope.selectedCityId = '';
+		$scope.shops =
+			[
+			   {
+				  "name":"yyy",
+				  "category_id":2,
+				  "locations":[
+					 {						
+						"city_id":368
+					 }
+				  ]
+			   },
+			   {
+				  "name":"xxx",
+				  "category_id":1,
+				  "locations":[
+					 {
+						"city_id":368,
+						"region_id":4
+					 },
+					 {
+						"city_id":369,
+						"region_id":4
+					 },
+					 {
+						"city_id":370,
+						"region_id":4
+					 }
+				  ]
+			   },
+			   {
+				  "name":"zzz",
+				  "category_id":2,
+				  "locations":[
+					 {
+						"city_id":30,
+						"region_id":4
+					 },
+					 {
+						"city_id":22,
+						"region_id":2
+					 }
+				  ]
+			   }
+			];
+			
+			
+		});
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="../library/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+	<div ng-controller="Controller">
+		<my-customer info="naomi"></my-customer>
+		<hr>
+		<my-customer info="igor"></my-customer>
+	</div>
+
+	<script>
+		app = angular.module('myApp', [])
+
+		.controller('Controller', ['$scope', function($scope) {
+			$scope.naomi = { name: 'Naomi', address: '1600 Amphitheatre' };
+			$scope.igor = { name: 'Igor', address: '123 Somewhere' };
+		}])
+		.directive('myCustomer', function() {
+			return {
+			  restrict: 'E',
+			  scope: {
+				customerInfo: '=info'
+			  },
+			  template: '<div>{{customerInfo.name}} Address: {{customerInfo.address}}</div><div>Name: {{igor.name}} Address: {{igor.address}}</div>'
+			};
+		});
+	</script>
+
+</body>
+
+</html>

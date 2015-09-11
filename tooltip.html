@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="library/angular.min.js"></script>
+	<script src="library/ui-bootstrap-tpls-0.11.0.min.js"></script>
+	<link rel="stylesheet" href="library/bootstrap.min.css"/>
+</head>
+
+<body ng-controller="myCtrl" ng-app="myApp" >
+	<h1>Tooltip example</h1>
+	<p>Hello World check out my <a href="#" tooltip-placement="top" tooltip="basic tooltip">foo</a> bar app.</p>
+	<br>
+	<input type="search" ng-model="search">
+	<input type="button" value="Search" ng-click="searchElement = search">
+	<p dynamic-tooltip="my message" tooltip-element="searchElement">
+		Hello World check out my foo bar app.
+		Hello World check out my foo bar app.
+	</p>
+		
+	<script>
+	//http://plnkr.co/edit/WQReIiqilhfnFPkR8fbe?p=preview
+		angular.module('myApp', ['ui.bootstrap'])
+		.controller('myCtrl', function($scope) {
+			})
+
+		.directive('dynamicTooltip', function($compile) {
+			return {
+				restrict: 'A',
+				scope: {
+					tooltipElement: '=',
+					dynamicTooltip: '@'
+				},
+			link: function(scope, element, attrs) {
+				var template = '<a href="#" tooltip-placement="top" tooltip="' + scope.dynamicTooltip + '">{{tooltipElement}}</a>';
+				scope.$watch('tooltipElement', function(value) {
+					var previousTooltip = element.find('a');
+					angular.forEach(previousTooltip, function(item,i){
+						var el = angular.element(item);
+						el.replaceWith(el.text());
+					});
+					var searchText = scope.tooltipElement;
+					if (searchText) {
+						replaced = element.html().replace(new RegExp(searchText, "g"), template);
+						element.html(replaced);
+					}
+					$compile(element.contents())(scope);
+				});
+			}
+			}//return
+		})
+		</script>
+	</body>
+
+</html>

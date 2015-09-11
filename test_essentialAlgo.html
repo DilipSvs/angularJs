@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Test Essential Algorithm</title>
+	<script src="library/angular.min.js"></script>
+	<script src="library/ui-bootstrap-tpls-0.11.0.min.js"></script>
+	<link rel="stylesheet" href="library/bootstrap.min.css"/>
+</head>
+
+<body ng-controller="myCtrl" ng-app="myApp" > 
+  
+  	<form ng-submit="processForm()">
+		<!-- Name -->
+		<div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+			<label>Name</label>
+			<input type="text" name="name" class="form-control" placeholder="john doe" ng-model="formData.name">
+		</div>
+		
+		<ul>
+			<li ng-repeat="name in list">
+				
+				<a href="#" ng-click="deleteItem($index)">{{name}}</a>  
+		</ul>
+		
+		<!-- SUBMIT BUTTON -->
+		<button type="submit" class="btn btn-success btn-lg btn-block" ng-click="submit()">
+			<span class="glyphicon glyphicon-flash"></span> Submit!
+		</button>
+	</form>
+		
+	<script>
+		angular.module('myApp', ['ui.bootstrap'])
+		.controller('myCtrl', function($scope) {
+			//init
+			$scope.formData = {};						
+			$scope.list=['john Doe',2,3];
+			
+			//submit 
+			$scope.submit = function(){
+				if ( $scope.formData.name != undefined && $scope.formData.name != "" ) {
+					//console.log( $scope.formData )
+					var name =  $scope.formData.name;
+					var list = $scope.list;
+					var count = 0;
+					//
+					for( var i=0,len=list.length; i<len;i++ ){
+						//console.log( count+ " "+ angular.lowercase( list[i] ) +" "+ angular.lowercase( name ) )
+						if ( angular.lowercase( list[i] ) == angular.lowercase ( name ) ) {
+							count = 1;
+							//console.log( angular.lowercase( list[i] ) +" "+ angular.lowercase( name ) );
+							break;
+						}
+					}
+					//
+					if ( count == 0) {
+						//console.log( name )
+						$scope.list.push( name )
+					} else {
+						console.log( "name already exist" );
+					}
+				}
+			}
+			
+			//delete
+			$scope.deleteItem = function (index) {
+				$scope.list.splice(index, 1);
+			}
+
+		})
+
+		
+		</script>
+	</body>
+
+</html>

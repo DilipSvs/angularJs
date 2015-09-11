@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- CSS (load bootstrap) -->
+    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="../app/styles/bootstrap.min.css"/>
+    
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+	<script data-semver="1.2.21" data-require="angular.js@1.2.21" src="../app/library/angular.min.js"></script>
+</head>
+
+	<body>
+		<div ng-app=''>
+			<div ng-controller="questionCtrl">
+				<div>
+					<div>Question</div>
+					<ul>
+						<li ng-repeat="elemnt in questionelemnt">
+
+							<div>
+								<div id={{elemnt.id}} style="display:inline" >
+									<span  ng-model="elemnt.question" ng-hide="editorEnabled" ng-click="editorEnabled=true">
+										{{elemnt.question}}
+									</span>
+									<div  ng-show="editorEnabled">
+										<input  ng-model="elemnt.question" ng-show="editorEnabled" >
+										<button href="#" ng-click="editorEnabled=false">Done editing</button>
+									</div>
+								</div>
+								<div style="display:inline">
+									<span>
+										<input type="text" ng-model="elemnt.answer" placeholder="Answer" required/>
+									</span>
+								</div>
+								<span>
+									<input ng-click="inlinef($event,elemnt.id)" type="checkbox" ng-model="elemnt.inline" placeholder="Answer" required>Inline</input>
+								</span>
+								<span ng-hide="elemnt.length == 1">
+									<a href ng-click="questionelemnt.splice($index, 1)">remove</a>
+								</span>
+							</div>
+							<hr/>
+						</li>
+						<li>
+							<a href ng-click="newItem($event)">New Item</a>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<button ng-click="showitems($event)">Submit</button>
+				</div>
+				<div id="displayitems" style="visibility:hidden;">
+					{{questionelemnt}}
+				</div>
+			</div>
+		</div>
+
+	<script>
+		function questionCtrl($scope){
+			var counter=0;
+			$scope.questionelemnt = [ {id:counter, question : 'Question-Click on me to edit!', answer : '',inline:true} ];
+
+			$scope.newItem = function($event){
+				counter++;
+				$scope.questionelemnt.push(  { id:counter, question : 'Question-Click on me to edit!', answer : '',inline:true} );
+				$event.preventDefault();
+			}
+			$scope.inlinef= function($event,inlinecontrol){
+				var checkbox = $event.target;
+				if(checkbox.checked){
+					$('#'+ inlinecontrol).css('display','inline');
+				}else{
+					$('#'+ inlinecontrol).css('display','');
+				}
+
+			}
+			$scope.showitems = function($event){
+				$('#displayitems').css('visibility','none');
+			}
+		}
+	</script>
+
+</body>
+</html>

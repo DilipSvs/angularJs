@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>controller inside directive</title>
+	<script src="library/angular.min.js"></script>
+</head>
+<body>
+
+	<div data-ng-app="myApp" data-ng-controller="MyController">
+		<button data-ng-click="alert()">Alert</button>
+		<button data-ng-click="alertService()">Alert Service</button>
+		<button data-ng-click="alertFactory()">Alert Factory</button>
+	</div>
+	
+	<script>
+		//http://csharperimage.jeremylikness.com/2014/01/understanding-providers-services-and.html
+		//http://jsfiddle.net/jeremylikness/A6Cb2/
+		function MyAlertProvider() {
+			var showTime = false;
+
+			this.setShowTime = function (show) {
+				showTime = !! show;
+			};
+
+			this.$get = ['$window',
+
+			function ($window) {
+				return {
+					alert: function (message) {
+						var dateStamp = new Date();
+						if (showTime) {
+							$window.alert(dateStamp.toString() + ": " + message);
+						} else {
+							$window.alert(message);
+						}
+					}
+				};
+			}];
+		}
+
+		function MyAlertService(myAlert) {
+			this.alert = function (message) {
+				myAlert.alert(message);
+			};
+		}
+		MyAlertService.$inject = ['myAlert'];
+
+		var app = angular.module('myApp', []);
+		app.provider('myAlert', MyAlertProvider);
+		app.service('myAlertService', MyAlertService);
+		app.factory('myAlertFactory', ['myAlert', function (myAlert) {
+			return {
+				alert: function (message) {
+					myAlert.alert(message);
+				}
+			};
+		}]);
+		app.config(['myAlertProvider', function (myAlertProvider) {
+			myAlertProvider.setShowTime(true);
+		}]);
+		app.controller('MyController', [
+			'myAlert',
+			'myAlertService',
+			'myAlertFactory',
+			'$scope', function (myAlert, myAlertService, myAlertFactory, $scope) {
+			$scope.alert = function () {
+				myAlert.alert("This is an alert!");
+			};
+			$scope.alertService = function () {
+				myAlertService.alert("This is an alert!");
+			};
+			$scope.alertFactory = function () {
+				myAlertFactory.alert("This is an alert!");
+			};    
+		}]);
+	</script>
+</body>
+</html>

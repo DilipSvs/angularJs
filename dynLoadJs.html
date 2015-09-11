@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<title>AngularJS loading javascript using directive</title>
+	 
+	<head>
+		<script src="library/jquery-2.1.1.min.js"></script>
+		<script src="library/angular.min.js"></script>
+	</head>
+ 
+	<body ng-app = "myApp">		
+		<!--OPTION 1-->
+		<!--using directives to load JS-->
+		<dyn-load-js type="myName"></dyn-load-js>
+		<!--OPTION 2-->
+		<!--using jquery and angular controller to load JS-->
+		<div ng-controller = "myCtrl"></div>
+		<div id="my"></div>
+		
+		<script>
+		//http://stackoverflow.com/questions/17695156/angular-js-load-css-and-js-files-dynamically
+		//http://stackoverflow.com/questions/21452706/append-html-to-an-element-in-directive-and-make-a-local-function-to-interact-wit
+					
+			var myApp = angular.module('myApp',[]);
+			
+			myApp.controller('myCtrl', ['$scope', '$compile', function ($scope,$compile){
+				//$("#my").append( $compile("<script src='includeDyn.js'>")($scope) );
+			}]);
+			
+			myApp.directive('dynLoadJs', function($compile) {
+				return {
+					restrict: 'E',
+					scope:{
+						type:'@'
+					},
+					template: '<span>{{ctrl.hi}}</span>',
+					link: function(scope, element, attrs) {
+						if( attrs.type == 'myName' ){
+							element.append( $compile("<script src='includeDyn.js'>")(scope) );
+						}
+						scope.ctrl.hi = attrs.type;
+					},
+					controller: function(){
+						//this.hi = 'Yov'
+					},
+					controllerAs: 'ctrl'
+				}
+			});
+
+		</script>
+	</body>
+</html>
